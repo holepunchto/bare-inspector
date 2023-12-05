@@ -15,8 +15,8 @@ exports.Session = class Session extends EventEmitter {
     const message = JSON.parse(string)
 
     if (message.method) {
-      this.emit('inspectorNotification', message)
       this.emit(message.method, message)
+      this.emit('inspectorNotification', message)
     } else {
       const req = this._requests.get(message.id)
 
@@ -72,5 +72,9 @@ exports.Session = class Session extends EventEmitter {
     }))
 
     return result
+  }
+
+  destroy () {
+    binding.destroy(this._handle)
   }
 }

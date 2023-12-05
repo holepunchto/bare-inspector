@@ -13,4 +13,6 @@ test('basic', async (t) => {
     value: 3,
     description: '3'
   })
+
+  session.destroy()
 })
