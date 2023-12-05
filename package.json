@@ -1,0 +1,33 @@
+{
+  "name": "bare-inspector",
+  "version": "1.0.0",
+  "description": "V8 inspector support for Bare",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "binding.c",
+    "binding.js",
+    "CMakeLists.txt",
+    "prebuilds"
+  ],
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holepunchto/bare-inspector.git"
+  },
+  "author": "Holepunch",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/holepunchto/bare-inspector/issues"
+  },
+  "homepage": "https://github.com/holepunchto/bare-inspector#readme",
+  "dependencies": {
+    "bare-events": "^2.1.0"
+  },
+  "devDependencies": {
+    "brittle": "^3.3.2",
+    "standard": "^17.0.0"
+  }
+}
