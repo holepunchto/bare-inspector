@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 const test = require('brittle')
 const inspector = require('.')
 
@@ -13,6 +14,24 @@ test('basic', async (t) => {
     value: 3,
     description: '3'
   })
+
+  session.destroy()
+})
+
+test('pause', async (t) => {
+  const session = new inspector.Session()
+
+  session.connect()
+
+  await session.post('Debugger.enable')
+
+  let paused = false
+
+  session.on('Debugger.paused', () => { paused = true })
+
+  debugger
+
+  t.ok(paused)
 
   session.destroy()
 })
