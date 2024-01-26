@@ -9,6 +9,8 @@ exports.Session = class Session extends EventEmitter {
     this._requests = new Map()
 
     this._handle = binding.create(this, this._onresponse)
+
+    this.destroyed = false
   }
 
   _onresponse (string) {
@@ -75,6 +77,9 @@ exports.Session = class Session extends EventEmitter {
   }
 
   destroy () {
+    if (this.destroyed) return
+    this.destroyed = true
+
     binding.destroy(this._handle)
   }
 }
