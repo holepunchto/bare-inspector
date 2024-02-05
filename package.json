@@ -10,6 +10,9 @@
     "CMakeLists.txt",
     "prebuilds"
   ],
+  "addon": {
+    "target": "bare_inspector"
+  },
   "scripts": {
     "test": "standard"
   },
@@ -29,8 +32,5 @@
   "devDependencies": {
     "brittle": "^3.3.2",
     "standard": "^17.0.0"
-  },
-  "addon": {
-    "target": "bare_inspector"
   }
 }
