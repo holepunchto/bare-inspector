@@ -14,7 +14,7 @@
     "target": "bare_inspector"
   },
   "scripts": {
-    "test": "standard"
+    "test": "standard && bare test.js"
   },
   "repository": {
     "type": "git",
