@@ -2,13 +2,15 @@ const EventEmitter = require('bare-events')
 const binding = require('./binding')
 
 exports.Session = class Session extends EventEmitter {
-  constructor () {
+  constructor (onpaused) {
     super()
 
     this._nextId = 1
     this._requests = new Map()
 
-    this._handle = binding.create(this, this._onresponse)
+    this._onpaused = onpaused || defaultPaused
+
+    this._handle = binding.create(this, this._onresponse, this._onpaused)
 
     this.destroyed = false
   }
@@ -82,4 +84,8 @@ exports.Session = class Session extends EventEmitter {
 
     binding.destroy(this._handle)
   }
+}
+
+function defaultPaused () {
+  return false
 }

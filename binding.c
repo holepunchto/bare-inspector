@@ -8,6 +8,7 @@ typedef struct {
   js_env_t *env;
   js_ref_t *ctx;
   js_ref_t *on_response;
+  js_ref_t *on_paused;
 } bare_inspector_t;
 
 static void
@@ -34,17 +35,52 @@ bare_inspector_on_response (js_env_t *env, js_inspector_t *handle, js_value_t *m
   assert(err == 0);
 }
 
+static bool
+bare_inspector_on_paused (js_env_t *env, js_inspector_t *handle, void *data) {
+  int err;
+
+  bare_inspector_t *inspector = (bare_inspector_t *) data;
+
+  js_handle_scope_t *scope;
+  err = js_open_handle_scope(env, &scope);
+  assert(err == 0);
+
+  js_value_t *ctx;
+  err = js_get_reference_value(env, inspector->ctx, &ctx);
+  assert(err == 0);
+
+  js_value_t *callback;
+  err = js_get_reference_value(env, inspector->on_paused, &callback);
+  assert(err == 0);
+
+  js_value_t *result;
+  err = js_call_function(env, ctx, callback, 0, NULL, &result);
+
+  bool value;
+
+  if (err < 0) value = false;
+  else {
+    err = js_get_value_bool(env, result, &value);
+    assert(err == 0);
+  }
+
+  err = js_close_handle_scope(env, scope);
+  assert(err == 0);
+
+  return value;
+}
+
 static js_value_t *
 bare_inspector_create (js_env_t *env, js_callback_info_t *info) {
   int err;
 
-  size_t argc = 2;
-  js_value_t *argv[2];
+  size_t argc = 3;
+  js_value_t *argv[3];
 
   err = js_get_callback_info(env, info, &argc, argv, NULL, NULL);
   assert(err == 0);
 
-  assert(argc == 2);
+  assert(argc == 3);
 
   js_value_t *handle;
 
@@ -58,12 +94,18 @@ bare_inspector_create (js_env_t *env, js_callback_info_t *info) {
   err = js_on_inspector_response(env, inspector->handle, bare_inspector_on_response, (void *) inspector);
   assert(err == 0);
 
+  err = js_on_inspector_paused(env, inspector->handle, bare_inspector_on_paused, (void *) inspector);
+  assert(err == 0);
+
   inspector->env = env;
 
   err = js_create_reference(env, argv[0], 1, &inspector->ctx);
   assert(err == 0);
 
   err = js_create_reference(env, argv[1], 1, &inspector->on_response);
+  assert(err == 0);
+
+  err = js_create_reference(env, argv[2], 1, &inspector->on_paused);
   assert(err == 0);
 
   return handle;
@@ -89,6 +131,9 @@ bare_inspector_destroy (js_env_t *env, js_callback_info_t *info) {
   assert(err == 0);
 
   err = js_delete_reference(env, inspector->on_response);
+  assert(err == 0);
+
+  err = js_delete_reference(env, inspector->on_paused);
   assert(err == 0);
 
   err = js_delete_reference(env, inspector->ctx);

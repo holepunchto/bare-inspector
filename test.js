@@ -35,3 +35,26 @@ test('pause', async (t) => {
 
   session.destroy()
 })
+
+test('pause with handler', async (t) => {
+  const session = new inspector.Session(() => {
+    if (paused) return false
+    else {
+      paused = true
+
+      return true
+    }
+  })
+
+  session.connect()
+
+  await session.post('Debugger.enable')
+
+  let paused = false
+
+  debugger
+
+  t.ok(paused)
+
+  session.destroy()
+})
