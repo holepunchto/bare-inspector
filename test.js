@@ -67,9 +67,13 @@ test('heap snapshot', async (t) => {
 
   const snapshot = new HeapSnapshot(session)
 
+  const chunks = []
+
   for await (const chunk of snapshot) {
-    t.ok(chunk)
+    chunks.push(chunk)
   }
+
+  t.ok(chunks.length > 0, 'yields at least one chunk')
 
   session.destroy()
 })
