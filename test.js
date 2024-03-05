@@ -70,4 +70,6 @@ test('heap snapshot', async (t) => {
   for await (const chunk of snapshot) {
     t.ok(chunk)
   }
+
+  session.destroy()
 })
