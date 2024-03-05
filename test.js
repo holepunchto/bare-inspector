@@ -1,10 +1,10 @@
 /* eslint-disable no-debugger */
 const test = require('brittle')
-const inspector = require('.')
+const Session = require('./lib/session')
 const HeapSnapshot = require('./lib/heap-snapshot')
 
 test('basic', async (t) => {
-  const session = new inspector.Session()
+  const session = new Session()
 
   session.connect()
 
@@ -20,7 +20,7 @@ test('basic', async (t) => {
 })
 
 test('pause', async (t) => {
-  const session = new inspector.Session()
+  const session = new Session()
 
   session.connect()
 
@@ -38,7 +38,7 @@ test('pause', async (t) => {
 })
 
 test('pause with handler', async (t) => {
-  const session = new inspector.Session(() => {
+  const session = new Session(() => {
     if (paused) return false
     else {
       paused = true
@@ -61,7 +61,7 @@ test('pause with handler', async (t) => {
 })
 
 test('heap snapshot', async (t) => {
-  const session = new inspector.Session()
+  const session = new Session()
 
   session.connect()
 
