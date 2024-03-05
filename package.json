@@ -2,11 +2,15 @@
   "name": "bare-inspector",
   "version": "1.1.2",
   "description": "V8 inspector support for Bare",
-  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./heap-snapshot": "./lib/heap-snapshot.js"
+  },
   "files": [
     "index.js",
     "binding.c",
     "binding.js",
+    "lib",
     "CMakeLists.txt",
     "prebuilds"
   ],
@@ -25,7 +29,8 @@
   },
   "homepage": "https://github.com/holepunchto/bare-inspector#readme",
   "dependencies": {
-    "bare-events": "^2.1.0"
+    "bare-events": "^2.1.0",
+    "streamx": "^2.16.1"
   },
   "devDependencies": {
     "brittle": "^3.3.2",

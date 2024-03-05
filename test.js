@@ -1,6 +1,7 @@
 /* eslint-disable no-debugger */
 const test = require('brittle')
 const inspector = require('.')
+const HeapSnapshot = require('./lib/heap-snapshot')
 
 test('basic', async (t) => {
   const session = new inspector.Session()
@@ -57,4 +58,16 @@ test('pause with handler', async (t) => {
   t.ok(paused)
 
   session.destroy()
+})
+
+test('heap snapshot', async (t) => {
+  const session = new inspector.Session()
+
+  session.connect()
+
+  const snapshot = new HeapSnapshot(session)
+
+  for await (const chunk of snapshot) {
+    t.ok(chunk)
+  }
 })
