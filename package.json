@@ -4,6 +4,7 @@
   "description": "V8 inspector support for Bare",
   "exports": {
     ".": "./index.js",
+    "./package": "./package.json",
     "./session": "./lib/session.js",
     "./heap-snapshot": "./lib/heap-snapshot.js"
   },
