@@ -32,7 +32,7 @@
   "homepage": "https://github.com/holepunchto/bare-inspector#readme",
   "dependencies": {
     "bare-events": "^2.1.0",
-    "streamx": "^2.16.1"
+    "bare-stream": "^1.0.0"
   },
   "devDependencies": {
     "brittle": "^3.3.2",

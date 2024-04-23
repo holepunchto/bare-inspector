@@ -12,7 +12,7 @@ typedef struct {
 } bare_inspector_t;
 
 static void
-bare_inspector_on_response (js_env_t *env, js_inspector_t *handle, js_value_t *message, void *data) {
+bare_inspector__on_response (js_env_t *env, js_inspector_t *handle, js_value_t *message, void *data) {
   int err;
 
   bare_inspector_t *inspector = (bare_inspector_t *) data;
@@ -36,7 +36,7 @@ bare_inspector_on_response (js_env_t *env, js_inspector_t *handle, js_value_t *m
 }
 
 static bool
-bare_inspector_on_paused (js_env_t *env, js_inspector_t *handle, void *data) {
+bare_inspector__on_paused (js_env_t *env, js_inspector_t *handle, void *data) {
   int err;
 
   bare_inspector_t *inspector = (bare_inspector_t *) data;
@@ -91,10 +91,10 @@ bare_inspector_create (js_env_t *env, js_callback_info_t *info) {
   err = js_create_inspector(env, &inspector->handle);
   assert(err == 0);
 
-  err = js_on_inspector_response(env, inspector->handle, bare_inspector_on_response, (void *) inspector);
+  err = js_on_inspector_response(env, inspector->handle, bare_inspector__on_response, (void *) inspector);
   assert(err == 0);
 
-  err = js_on_inspector_paused(env, inspector->handle, bare_inspector_on_paused, (void *) inspector);
+  err = js_on_inspector_paused(env, inspector->handle, bare_inspector__on_paused, (void *) inspector);
   assert(err == 0);
 
   inspector->env = env;
@@ -187,7 +187,7 @@ bare_inspector_post (js_env_t *env, js_callback_info_t *info) {
 }
 
 static js_value_t *
-init (js_env_t *env, js_value_t *exports) {
+bare_inspector_exports (js_env_t *env, js_value_t *exports) {
   int err;
 
 #define V(name, fn) \
@@ -208,4 +208,4 @@ init (js_env_t *env, js_value_t *exports) {
   return exports;
 }
 
-BARE_MODULE(bare_inspector, init)
+BARE_MODULE(bare_inspector, bare_inspector_exports)
