@@ -1,5 +1,6 @@
 /* eslint-disable no-debugger */
 const test = require('brittle')
+const Console = require('./lib/console')
 const Session = require('./lib/session')
 const HeapSnapshot = require('./lib/heap-snapshot')
 
@@ -56,6 +57,33 @@ test('pause with handler', async (t) => {
   debugger
 
   t.ok(paused)
+
+  session.destroy()
+})
+
+test('console', async (t) => {
+  const console = new Console()
+  const session = new Session()
+
+  session.connect()
+
+  await session.post('Console.enable')
+
+  const notifications = []
+
+  session.on('inspectorNotification', (n) => notifications.push(n))
+
+  console.log('Hello world!')
+
+  t.is(notifications.length, 1)
+
+  const [n] = notifications
+
+  t.is(n.method, 'Console.messageAdded')
+
+  for (const [key, value] of Object.entries(n.params.message)) {
+    t.comment(key + ':', value)
+  }
 
   session.destroy()
 })

@@ -205,6 +205,17 @@ bare_inspector_exports (js_env_t *env, js_value_t *exports) {
   V("post", bare_inspector_post)
 #undef V
 
+  js_value_t *bindings;
+  err = js_get_bindings(env, &bindings);
+  assert(err == 0);
+
+  js_value_t *console;
+  err = js_get_named_property(env, bindings, "console", &console);
+  assert(err == 0);
+
+  err = js_set_named_property(env, exports, "console", console);
+  assert(err == 0);
+
   return exports;
 }
 

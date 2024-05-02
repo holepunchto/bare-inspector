@@ -5,6 +5,7 @@
   "exports": {
     ".": "./index.js",
     "./package": "./package.json",
+    "./console": "./lib/console.js",
     "./session": "./lib/session.js",
     "./heap-snapshot": "./lib/heap-snapshot.js"
   },
@@ -30,6 +31,9 @@
     "url": "https://github.com/holepunchto/bare-inspector/issues"
   },
   "homepage": "https://github.com/holepunchto/bare-inspector#readme",
+  "engines": {
+    "bare": ">=1.2.0"
+  },
   "dependencies": {
     "bare-events": "^2.1.0",
     "bare-stream": "^1.0.0"
