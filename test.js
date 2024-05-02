@@ -62,6 +62,8 @@ test('pause with handler', async (t) => {
 })
 
 test('console', async (t) => {
+  t.plan(1)
+
   const console = new Console()
   const session = new Session()
 
@@ -69,21 +71,15 @@ test('console', async (t) => {
 
   await session.post('Console.enable')
 
-  const notifications = []
+  session.on('Console.messageAdded', (n) => {
+    for (const [key, value] of Object.entries(n.params.message)) {
+      t.comment(key + ':', value)
+    }
 
-  session.on('inspectorNotification', (n) => notifications.push(n))
+    t.pass()
+  })
 
   console.log('Hello world!')
-
-  t.is(notifications.length, 1)
-
-  const [n] = notifications
-
-  t.is(n.method, 'Console.messageAdded')
-
-  for (const [key, value] of Object.entries(n.params.message)) {
-    t.comment(key + ':', value)
-  }
 
   session.destroy()
 })
