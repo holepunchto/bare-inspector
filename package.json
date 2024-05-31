@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "bare-events": "^2.1.0",
-    "bare-stream": "^1.0.0"
+    "bare-stream": "^2.0.0"
   },
   "devDependencies": {
     "brittle": "^3.3.2",
