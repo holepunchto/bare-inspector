@@ -7,6 +7,7 @@
     "./package": "./package.json",
     "./console": "./lib/console.js",
     "./session": "./lib/session.js",
+    "./server": "./lib/server.js",
     "./heap-snapshot": "./lib/heap-snapshot.js"
   },
   "files": [
@@ -36,7 +37,10 @@
   },
   "dependencies": {
     "bare-events": "^2.1.0",
-    "bare-stream": "^2.0.0"
+    "bare-http1": "^3.5.2",
+    "bare-stream": "^2.0.0",
+    "bare-url": "^1.1.0",
+    "bare-ws": "^1.0.0"
   },
   "devDependencies": {
     "brittle": "^3.3.2",
