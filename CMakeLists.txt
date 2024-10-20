@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(bare_inspector C)
+find_package(cmake-bare REQUIRED PATHS node_modules/cmake-bare)
 
-include(bare)
+project(bare_inspector C)
 
 add_bare_module(bare_inspector)
 
