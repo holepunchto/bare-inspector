@@ -15,7 +15,9 @@ const session = new Session()
 session.connect()
 
 try {
-  const { result } = await session.post('Runtime.evaluate', { expression: '1 + 2' })
+  const { result } = await session.post('Runtime.evaluate', {
+    expression: '1 + 2'
+  })
 
   console.log(result)
 } catch (err) {

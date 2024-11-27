@@ -9,7 +9,9 @@ test('basic', async (t) => {
 
   session.connect()
 
-  const { result } = await session.post('Runtime.evaluate', { expression: '1 + 2' })
+  const { result } = await session.post('Runtime.evaluate', {
+    expression: '1 + 2'
+  })
 
   t.alike(result, {
     type: 'number',
@@ -29,7 +31,9 @@ test('pause', async (t) => {
 
   let paused = false
 
-  session.on('Debugger.paused', () => { paused = true })
+  session.on('Debugger.paused', () => {
+    paused = true
+  })
 
   debugger
 

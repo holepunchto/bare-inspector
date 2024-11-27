@@ -12,7 +12,7 @@ typedef struct {
 } bare_inspector_t;
 
 static void
-bare_inspector__on_response (js_env_t *env, js_inspector_t *handle, js_value_t *message, void *data) {
+bare_inspector__on_response(js_env_t *env, js_inspector_t *handle, js_value_t *message, void *data) {
   int err;
 
   bare_inspector_t *inspector = (bare_inspector_t *) data;
@@ -36,7 +36,7 @@ bare_inspector__on_response (js_env_t *env, js_inspector_t *handle, js_value_t *
 }
 
 static bool
-bare_inspector__on_paused (js_env_t *env, js_inspector_t *handle, void *data) {
+bare_inspector__on_paused(js_env_t *env, js_inspector_t *handle, void *data) {
   int err;
 
   bare_inspector_t *inspector = (bare_inspector_t *) data;
@@ -71,7 +71,7 @@ bare_inspector__on_paused (js_env_t *env, js_inspector_t *handle, void *data) {
 }
 
 static js_value_t *
-bare_inspector_create (js_env_t *env, js_callback_info_t *info) {
+bare_inspector_create(js_env_t *env, js_callback_info_t *info) {
   int err;
 
   size_t argc = 3;
@@ -112,7 +112,7 @@ bare_inspector_create (js_env_t *env, js_callback_info_t *info) {
 }
 
 static js_value_t *
-bare_inspector_destroy (js_env_t *env, js_callback_info_t *info) {
+bare_inspector_destroy(js_env_t *env, js_callback_info_t *info) {
   int err;
 
   size_t argc = 1;
@@ -143,7 +143,7 @@ bare_inspector_destroy (js_env_t *env, js_callback_info_t *info) {
 }
 
 static js_value_t *
-bare_inspector_connect (js_env_t *env, js_callback_info_t *info) {
+bare_inspector_connect(js_env_t *env, js_callback_info_t *info) {
   int err;
 
   size_t argc = 1;
@@ -165,7 +165,7 @@ bare_inspector_connect (js_env_t *env, js_callback_info_t *info) {
 }
 
 static js_value_t *
-bare_inspector_post (js_env_t *env, js_callback_info_t *info) {
+bare_inspector_post(js_env_t *env, js_callback_info_t *info) {
   int err;
 
   size_t argc = 2;
@@ -187,7 +187,7 @@ bare_inspector_post (js_env_t *env, js_callback_info_t *info) {
 }
 
 static js_value_t *
-bare_inspector_exports (js_env_t *env, js_value_t *exports) {
+bare_inspector_exports(js_env_t *env, js_value_t *exports) {
   int err;
 
 #define V(name, fn) \
