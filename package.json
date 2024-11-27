@@ -1,6 +1,6 @@
 {
   "name": "bare-inspector",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "V8 inspector support for Bare",
   "exports": {
     ".": "./index.js",
