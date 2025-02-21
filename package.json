@@ -3,15 +3,31 @@
   "version": "4.0.1",
   "description": "V8 inspector support for Bare",
   "exports": {
-    ".": "./index.js",
-    "./package": "./package.json",
-    "./console": "./lib/console.js",
-    "./session": "./lib/session.js",
-    "./server": "./lib/server.js",
-    "./heap-snapshot": "./lib/heap-snapshot.js"
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./console": {
+      "types": "./lib/console.d.ts",
+      "default": "./lib/console.js"
+    },
+    "./session": {
+      "types": "./lib/session.d.ts",
+      "default": "./lib/session.js"
+    },
+    "./server": {
+      "types": "./lib/server.d.ts",
+      "default": "./lib/server.js"
+    },
+    "./heap-snapshot": {
+      "types": "./lib/heap-snapshot.d.ts",
+      "default": "./lib/heap-snapshot.js"
+    },
+    "./package": "./package.json"
   },
   "files": [
     "index.js",
+    "index.d.ts",
     "binding.c",
     "binding.js",
     "lib",
@@ -43,9 +59,18 @@
     "bare-ws": "^2.0.0"
   },
   "devDependencies": {
+    "bare-tcp": "^2.0.3",
     "brittle": "^3.3.2",
     "cmake-bare": "^1.1.6",
     "prettier": "^3.4.1",
     "prettier-config-standard": "^7.0.0"
+  },
+  "peerDependencies": {
+    "bare-tcp": "*"
+  },
+  "peerDependenciesMeta": {
+    "bare-tcp": {
+      "optional": true
+    }
   }
 }
