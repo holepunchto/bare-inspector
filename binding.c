@@ -12,7 +12,7 @@ typedef struct {
 } bare_inspector_t;
 
 static void
-bare_inspector__on_response(js_env_t *env, js_inspector_t *handle, js_value_t *message, void *data) {
+bare_inspector__on_response(js_env_t *env, js_inspector_t *handle, const char *message, size_t len, void *data) {
   int err;
 
   bare_inspector_t *inspector = (bare_inspector_t *) data;
@@ -29,7 +29,13 @@ bare_inspector__on_response(js_env_t *env, js_inspector_t *handle, js_value_t *m
   err = js_get_reference_value(env, inspector->on_response, &callback);
   assert(err == 0);
 
-  js_call_function(env, ctx, callback, 1, &message, NULL);
+  js_value_t *args[1];
+
+  err = js_create_string_utf8(env, (const utf8_t *) message, len, &args[0]);
+  assert(err == 0);
+
+  err = js_call_function(env, ctx, callback, 1, args, NULL);
+  (void) err;
 
   err = js_close_handle_scope(env, scope);
   assert(err == 0);
@@ -91,7 +97,7 @@ bare_inspector_create(js_env_t *env, js_callback_info_t *info) {
   err = js_create_inspector(env, &inspector->handle);
   assert(err == 0);
 
-  err = js_on_inspector_response(env, inspector->handle, bare_inspector__on_response, (void *) inspector);
+  err = js_on_inspector_response_transitional(env, inspector->handle, bare_inspector__on_response, (void *) inspector);
   assert(err == 0);
 
   err = js_on_inspector_paused(env, inspector->handle, bare_inspector__on_paused, (void *) inspector);
@@ -180,8 +186,20 @@ bare_inspector_post(js_env_t *env, js_callback_info_t *info) {
   err = js_get_arraybuffer_info(env, argv[0], (void **) &inspector, NULL);
   assert(err == 0);
 
-  err = js_send_inspector_request(env, inspector->handle, argv[1]);
+  size_t len;
+  err = js_get_value_string_utf8(env, argv[1], NULL, 0, &len);
   assert(err == 0);
+
+  len += 1 /* NULL */;
+
+  utf8_t *message = malloc(len);
+  err = js_get_value_string_utf8(env, argv[1], message, len, NULL);
+  assert(err == 0);
+
+  err = js_send_inspector_request_transitional(env, inspector->handle, (char *) message, len - 1 /* NULL */);
+  assert(err == 0);
+
+  free(message);
 
   return NULL;
 }
