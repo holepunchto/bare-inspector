@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 const test = require('brittle')
 const Console = require('./lib/console')
 const Session = require('./lib/session')
