@@ -10,18 +10,14 @@ interface InspectorSessionEvents extends EventMap {
   [method: string]: [message: SessionMessage]
 }
 
-interface InspectorSession<
-  M extends InspectorSessionEvents = InspectorSessionEvents
-> extends EventEmitter<M> {
+interface InspectorSession<M extends InspectorSessionEvents = InspectorSessionEvents>
+  extends EventEmitter<M> {
   readonly connected: boolean
   readonly destroyed: boolean
 
   connect(): void
 
-  post<T extends unknown = unknown>(
-    method: string,
-    cb: (err: Error, result: T) => void
-  ): Promise<T>
+  post<T extends unknown = unknown>(method: string, cb: (err: Error, result: T) => void): Promise<T>
 
   post<T extends unknown = unknown>(
     method: string,
