@@ -15,10 +15,9 @@ interface InspectorServer<M extends InspectorServerEvents = InspectorServerEvent
   readonly listening: boolean
 
   address(): TCPSocketAddress
-  close(onclose?: (err: Error) => void): void
-
-  ref(): void
-  unref(): void
+  close(cb?: (err?: Error | null) => void): this
+  ref(): this
+  unref(): this
 }
 
 declare class InspectorServer {
