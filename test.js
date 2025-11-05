@@ -64,6 +64,19 @@ test('pause with handler', async (t) => {
   session.destroy()
 })
 
+test('multiple debugger sessions', async (t) => {
+  const a = new Session()
+  a.connect()
+  await a.post('Debugger.enable')
+
+  const b = new Session()
+  b.connect()
+  await b.post('Debugger.enable')
+
+  a.destroy()
+  b.destroy()
+})
+
 test('console', async (t) => {
   t.plan(1)
 
