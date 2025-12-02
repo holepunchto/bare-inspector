@@ -104,3 +104,19 @@ test('heap snapshot', async (t) => {
 
   session.destroy()
 })
+
+test('bind global console', async (t) => {
+  const session = new Session()
+
+  session.connect()
+
+  await session.post('Console.enable')
+
+  session.on('Console.messageAdded', () => {
+    t.pass()
+  })
+
+  console.log('Hello world!')
+
+  session.destroy()
+})
