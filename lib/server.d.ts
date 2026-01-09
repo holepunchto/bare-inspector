@@ -10,8 +10,9 @@ interface InspectorServerOptions {
   path: URL | string
 }
 
-interface InspectorServer<M extends InspectorServerEvents = InspectorServerEvents>
-  extends EventEmitter<M> {
+interface InspectorServer<
+  M extends InspectorServerEvents = InspectorServerEvents
+> extends EventEmitter<M> {
   readonly listening: boolean
 
   address(): TCPSocketAddress
