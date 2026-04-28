@@ -56,7 +56,7 @@
     "bare-http1": "^4.0.0",
     "bare-stream": "^2.0.0",
     "bare-url": "^2.0.0",
-    "bare-ws": "^2.0.0"
+    "bare-ws": "^3.0.0"
   },
   "devDependencies": {
     "bare-tcp": "^2.0.3",
