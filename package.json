@@ -51,7 +51,7 @@
   },
   "homepage": "https://github.com/holepunchto/bare-inspector#readme",
   "engines": {
-    "bare": ">=1.25.0 <1.29.0"
+    "bare": ">=1.29.0"
   },
   "dependencies": {
     "bare-events": "^2.1.0",
