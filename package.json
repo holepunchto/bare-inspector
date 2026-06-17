@@ -51,7 +51,7 @@
   },
   "homepage": "https://github.com/holepunchto/bare-inspector#readme",
   "engines": {
-    "bare": ">=1.25.0 <1.29.0"
+    "bare": ">=1.29.0"
   },
   "dependencies": {
     "bare-events": "^2.1.0",
@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "bare-tcp": "^2.0.3",
+    "bare-inspector": "file:.",
     "brittle": "^3.3.2",
     "cmake-bare": "^1.1.6",
     "lunte": "^1.7.0",
