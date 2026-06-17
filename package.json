@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "bare-tcp": "^2.0.3",
+    "bare-inspector": "file:.",
     "brittle": "^3.3.2",
     "cmake-bare": "^1.1.6",
     "lunte": "^1.7.0",
