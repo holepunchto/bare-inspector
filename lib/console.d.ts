@@ -1,11 +1,18 @@
-/** Options for `dir()`: `colors`, `depth`, and `showHidden`, matching `util.inspect()`'s options of the same names. */
+/**
+ * Options for `dir()`: `colors`, `depth`, and `showHidden`, matching `util.inspect()`'s options of
+ * the same names.
+ */
 interface DirOptions {
   colors?: number
   depth?: number
   showHidden?: boolean
 }
 
-/** A console implementation that sends messages to the V8 inspector's remote console, mirroring Node's `inspector.console`. Each method matches its `console` counterpart (`log`, `error`, `warn`, `dir`, `table`, `time`/`timeEnd`, `group`/`groupEnd`, `count`, `trace`, etc.). */
+/**
+ * A console implementation that sends messages to the V8 inspector's remote console, mirroring
+ * Node's `inspector.console`. Each method matches its `console` counterpart (`log`, `error`,
+ * `warn`, `dir`, `table`, `time`/`timeEnd`, `group`/`groupEnd`, `count`, `trace`, etc.).
+ */
 declare class InspectorConsole {
   /**
    * @param data - The values to log.

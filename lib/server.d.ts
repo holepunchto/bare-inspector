@@ -7,7 +7,10 @@ interface InspectorServerEvents extends EventMap {
   listening: []
 }
 
-/** Options for `Server`: `path`, the entry-point URL reported to DevTools as the URL of the inspected script. */
+/**
+ * Options for `Server`: `path`, the entry-point URL reported to DevTools as the URL of the
+ * inspected script.
+ */
 interface InspectorServerOptions {
   path: URL | string
 }
@@ -20,7 +23,10 @@ interface InspectorServer<
 
   /** Returns the address the server is listening on. */
   address(): TCPSocketAddress
-  /** Stops the server from accepting new connections, destroys existing connections and the underlying debugger session, and calls `cb` once closed. */
+  /**
+   * Stops the server from accepting new connections, destroys existing connections and the
+   * underlying debugger session, and calls `cb` once closed.
+   */
   close(cb?: (err?: Error | null) => void): this
   /** Marks the server so the event loop won't exit while it's listening. */
   ref(): this
@@ -30,14 +36,18 @@ interface InspectorServer<
 
 declare class InspectorServer {
   /**
-   * @param opts - Options; `path` is the script URL reported to DevTools and defaults to `require.main.path`.
+   * @param opts - Options; `path` is the script URL reported to DevTools and defaults to
+   * `require.main.path`.
    */
   constructor(opts: InspectorServerOptions)
   constructor(port: number, opts: InspectorServerOptions)
   constructor(port: number, host: string, opts?: InspectorServerOptions)
 }
 
-/** A WebSocket server exposing a `Session` for remote debugging, compatible with Chrome DevTools and mirroring the endpoints Node's `--inspect` exposes (`/json/list` and a WebSocket debugger URL). */
+/**
+ * A WebSocket server exposing a `Session` for remote debugging, compatible with Chrome DevTools and
+ * mirroring the endpoints Node's `--inspect` exposes (`/json/list` and a WebSocket debugger URL).
+ */
 declare namespace InspectorServer {
   export { type InspectorServerEvents, type InspectorServerOptions }
 }
