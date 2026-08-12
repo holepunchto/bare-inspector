@@ -41,7 +41,7 @@ snapshot.pipe(fs.createWriteStream('profile.heapsnapshot'))
 
 ## API
 
-See the [full API reference](https://docs.pears.com/reference/bare/modules/bare-inspector).
+See the [`bare-inspector` reference](https://docs.pears.com/reference/bare/modules/bare-inspector).
 
 ## License
 
