@@ -41,21 +41,7 @@ snapshot.pipe(fs.createWriteStream('profile.heapsnapshot'))
 
 ## API
 
-#### `const session = new Session()`
-
-#### `session.connect()`
-
-#### `session.post()`
-
-#### `session.destroy()`
-
-#### `session.on('<inspector-protocol-method>', message)`
-
-#### `session.on('inspectorNotification', message)`
-
-#### `const snapshot = new HeapSnapshot(session)`
-
-#### `for await (const chunk of snapshot)`
+See the [`bare-inspector` reference](https://docs.pears.com/reference/bare/modules/bare-inspector).
 
 ## License
 
